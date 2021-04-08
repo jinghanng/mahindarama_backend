@@ -1,20 +1,13 @@
-// import "react-hot-loader";
-import React from "react";
-import ReactDOM from "react-dom";
-import { CookiesProvider } from "react-cookie";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import App from "./components/App/App.jsx";
+import App from './App';
 
-const rootElement = document.getElementById("root");
+const title = 'React with Webpack and Babel';
 
 ReactDOM.render(
-  <CookiesProvider>
-    <App />
-  </CookiesProvider>,
-  rootElement
+  <App title={title} />,
+  document.getElementById('app')
 );
 
-// Uncomment only in development
-// module.hot.accept();
-
-console.log(process.env.NODE_ENV);
+module.hot.accept();

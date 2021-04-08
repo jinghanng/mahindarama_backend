@@ -1,20 +1,18 @@
-const Dotenv = require("dotenv-webpack");
-const webpack = require("webpack");
+const path = require('path');
+const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: "development",
-  devtool: "eval-source-map",
+  mode: 'development',
   plugins: [
-    new Dotenv({
-      path: "./.env.development",
-    }),
     new webpack.HotModuleReplacementPlugin(),
+    new Dotenv({
+      path: path.resolve(__dirname, '..', './.env.development'),
+    }),
   ],
   devServer: {
-    host: "localhost",
-    compress: true,
-    historyApiFallback: true,
-    stats: "errors-only",
+    contentBase: path.resolve(__dirname, '..', './dist'),
     hot: true,
   },
+  devtool: 'eval-source-map',
 };
