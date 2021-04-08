@@ -1,1 +1,0 @@
-https://www.django-cloudrun-jv5lt5t3va-uc.a.run.app
