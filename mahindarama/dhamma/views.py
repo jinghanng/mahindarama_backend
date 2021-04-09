@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from utils.error_codes import ResponseCodes
-from JH_RestAPI import pagination
+from mahindarama import pagination
 from utils.generic_json_creator import create_response
 from .models import Dhamma, Sangha, Location, Category, MediaType, Language
 from .serializers import DhammaSerializer

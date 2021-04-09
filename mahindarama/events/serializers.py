@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Dhamma
+from .models import Event
 
 
 class StringSerializer(serializers.StringRelatedField):
@@ -7,13 +7,12 @@ class StringSerializer(serializers.StringRelatedField):
         return value
 
 
-class DhammaSerializer(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     location = StringSerializer(many=True)
     categories = StringSerializer(many=True)
     sangha_name = StringSerializer(many=True)
-    media_type = StringSerializer(many=False)
-    language = StringSerializer(many=False)
+    publish_by = StringSerializer(many=False)
 
     class Meta:
-        model = Dhamma
+        model = Event
         fields = ('__all__')

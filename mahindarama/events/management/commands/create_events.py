@@ -1,7 +1,8 @@
 import datetime
 import random
 from django.core.management.base import BaseCommand
-from dhamma.models import Dhamma, Sangha, Location, Category, MediaType, Language
+from events.models import Event, Sangha, Location, Category, Event_Creator
+
 
 locations = [
     'Mahindarama Temple',
@@ -40,15 +41,15 @@ media_types = [
     'Audio'
 ]
 
-language = [
-    'Pali',
-    'English',
-    'Chinese',
-    'Thai',
-    'Hindi',
-    'Spanish',
-    'French',
-    'Italian'
+publish_by = [
+    'Blane Edward',
+    'Roger Smith',
+    'Cookie Yu',
+    'Nellie Roche',
+    'Milton Hawkins',
+    'Tannie Hill',
+    'Cherish More',
+    'Frida Yamil'
 ]
 
 
@@ -72,32 +73,49 @@ def generate_sangha_name():
     return sangha[index]
 
 
-def generate_record_date():
+def generate_media_types():
+    index = random.randint(0, 2)
+    return media_types[index]
+
+
+def generate_start_date():
+    year = random.randint(2020, 2021)
+    month = random.randint(1, 6)
+    day = random.randint(1, 28)
+    return datetime.date(year, month, day)
+
+
+def generate_end_date():
+    year = random.randint(2020, 2021)
+    month = random.randint(7, 12)
+    day = random.randint(1, 28)
+    return datetime.date(year, month, day)
+
+
+def generate_start_time():
+    hour = random.randint(0, 23)
+    minute = random.randint(0, 59)
+    second = random.randint(0, 59)
+    return datetime.time(hour, minute, second)
+
+
+def generate_end_time():
+    hour = random.randint(0, 23)
+    minute = random.randint(0, 59)
+    second = random.randint(0, 59)
+    return datetime.time(hour, minute, second)
+
+
+def generate_publish_date():
     year = random.randint(2020, 2021)
     month = random.randint(1, 12)
     day = random.randint(1, 28)
     return datetime.date(year, month, day)
 
 
-def generate_media_types():
-    index = random.randint(0, 2)
-    return media_types[index]
-
-
-def generate_duration():
-    hour = random.randint(0, 23)
-    minute = random.randint(0, 59)
-    return datetime.time(hour, minute)
-
-
-def generate_language():
+def generate_publish_by():
     index = random.randint(0, 7)
-    return language[index]
-
-
-def generate_sadhu():
-    random_no = random.randint(1000, 3000)
-    return random_no
+    return publish_by[index]
 
 
 class Command(BaseCommand):
@@ -115,37 +133,39 @@ class Command(BaseCommand):
                 image = generate_image()
                 category_name = generate_category_name()
                 sangha_name = generate_sangha_name()
-                record_date = generate_record_date()
                 media_type = generate_media_types()
-                duration = generate_duration()
-                language = generate_language()
-                sadhu = generate_sadhu()
+                start_date = generate_start_date()
+                end_date = generate_end_date()
+                start_time = generate_start_time()
+                end_time = generate_end_time()
+                publish_date = generate_publish_date()
+                publish_by = generate_publish_by()
 
-                dhamma = Dhamma(
+                publishBy = Event_Creator.objects.get_or_create(
+                    name=publish_by)
+
+                event = Event(
                     title=title,
                     image=image,
-                    record_date=record_date,
-                    duration=duration,
-                    sadhu=sadhu,
+                    start_date=start_date,
+                    end_date=end_date,
+                    start_time=start_time,
+                    end_time=end_time,
+                    publish_date=publish_date,
+                    publish_by=Event_Creator.objects.get(name=publish_by),
                 )
 
-                dhamma.save()
+                event.save()
 
-                _location = Location.objects.get_or_create(name=location)
-                _category = Category.objects.get_or_create(name=category_name)
-                _sangha = Sangha.objects.get_or_create(name=sangha_name)
-                _mediatype = MediaType.objects.get_or_create(name=media_type)
-                _language = Language.objects.get_or_create(name=language)
+                locate = Location.objects.get_or_create(name=location)
+                category = Category.objects.get_or_create(name=category_name)
+                sangha = Sangha.objects.get_or_create(name=sangha_name)
 
-                dhamma.location.add(
+                event.location.add(
                     Location.objects.get(name=location))
-                dhamma.categories.add(
+                event.categories.add(
                     Category.objects.get(name=category_name))
-                dhamma.sangha_name.add(
+                event.sangha_name.add(
                     Sangha.objects.get(name=sangha_name))
-                dhamma.media_type.add(
-                    MediaType.objects.get(name=media_type))
-                dhamma.language.add(
-                    Language.objects.get(name=language))
 
-        self.stdout.write(self.style.SUCCESS('Dhamma imported successfully'))
+        self.stdout.write(self.style.SUCCESS('Event imported successfully'))
