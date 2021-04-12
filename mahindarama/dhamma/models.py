@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Sangha(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=300)
 
     def __str__(self):
         return self.name
@@ -40,7 +40,7 @@ class Language(models.Model):
 
 
 class Dhamma(models.Model):
-    title = models.CharField(max_length=300)
+    title = models.CharField(max_length=500)
     location = models.ManyToManyField(Location)
     image = models.URLField(default='', blank=True)
     categories = models.ManyToManyField(Category)

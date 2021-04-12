@@ -11,7 +11,11 @@ print("Using local proxy")
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db_proxy.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'production',
+        'USER': 'dbproduser',
+        'PASSWORD': 'elephant',
+        'HOST': '127.0.0.1',
+        'PORT': 6543,
     }
 }

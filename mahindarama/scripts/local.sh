@@ -1,0 +1,1 @@
+gunicorn mahindarama.wsgi:application
