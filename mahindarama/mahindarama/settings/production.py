@@ -16,7 +16,7 @@ print("Using production")
 
 # Database
 
-HOME_PAGE_MESSAGE = f"Hello World Jing Han. This Is Production."
+HOME_PAGE_MESSAGE = f"Hello World Ng Jing Han. This Is Production."
 
 DB_USER_UN = os.environ.get("DB_USER_UN", '')
 DB_USER_PW = os.environ.get("DB_USER_PW", 'abc')
