@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'dhamma',
-    'events',
 ]
 
 MIDDLEWARE = [
@@ -54,10 +54,28 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mahindarama.urls'
 
+REST_FRAMEWORK = {
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    # 'oauth2_provider.ext.rest_framework.OAuth2Authentication',  # django-oauth-toolkit < 1.0.0
+    # django-oauth-toolkit >= 1.0.0
+    # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    # 'rest_framework_social_oauth2.authentication.SocialAuthentication',
+    # 'rest_framework.authentication.TokenAuthentication',
+    # ),
+    'DEFAULT_PAGINATION_CLASS': 'mahindarama.pagination.CustomPagination',
+    'PAGE_SIZE': 30,
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #    'rest_framework.permissions.IsAuthenticated',),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser'
+    )
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

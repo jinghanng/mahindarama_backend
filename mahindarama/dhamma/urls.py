@@ -6,4 +6,5 @@ from dhamma import views
 urlpatterns = [
     path('', views.dhamma),
 ]
+
 urlpatterns = format_suffix_patterns(urlpatterns)

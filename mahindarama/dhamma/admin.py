@@ -7,7 +7,7 @@ from .models import Dhamma, Sangha, Location, Category, MediaType, Language
 
 @admin.register(Dhamma)
 class DhammaAdmin(admin.ModelAdmin):
-    list_display = ("title", "record_date",)
+    list_display = ("title",)
 
 
 @admin.register(Sangha)

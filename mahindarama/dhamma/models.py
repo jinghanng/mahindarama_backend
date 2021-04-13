@@ -49,7 +49,6 @@ class Dhamma(models.Model):
     media_type = models.ManyToManyField(MediaType)
     duration = models.DurationField(blank=True, null=True)
     language = models.ManyToManyField(Language)
-    sadhu = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.title

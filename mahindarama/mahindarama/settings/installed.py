@@ -6,5 +6,4 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dhamma',
-    'events',
 ]
